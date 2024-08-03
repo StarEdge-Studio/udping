@@ -21,7 +21,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="UDPing Server")
     parser.add_argument("host", type=str, help="Host to bind the server")
     parser.add_argument("port", type=int, help="Port to bind the server")
-    parser.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__}")
+    parser.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__} (server)")
 
     args = parser.parse_args()
 

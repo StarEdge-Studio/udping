@@ -94,7 +94,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="UDPing Client")
     parser.add_argument("host", type=str, help="Server host to ping (IP or domain name)")
     parser.add_argument("port", type=int, help="Server port to ping")
-    parser.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__}")
+    parser.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__} (client)")
     parser.add_argument("-c", "--count", type=int, default=5, help="Number of pings to send")
     parser.add_argument("-f", "--forever", action="store_true",
                         help="Ping the server forever (will cover the count option)")
