@@ -38,6 +38,7 @@ def udping_client(host, port, count, interval, timeout=1):
     try:
         while seq < count:
             message = f"PING {seq} {time.time()}"
+            # noinspection PyBroadException
             try:
                 start_time = time.time()
                 sock.sendto(message.encode(), server_address)
@@ -48,6 +49,8 @@ def udping_client(host, port, count, interval, timeout=1):
                 print(f"Reply from {ip}:{port} : seq={seq} time={rtt:.2f} ms")
             except socket.timeout:
                 print(yellow + f"Request timed out, seq={seq}" + reset)
+            except Exception:
+                print(yellow + f"Request failed, seq={seq}" + reset)
 
             seq += 1
             time.sleep(interval)
