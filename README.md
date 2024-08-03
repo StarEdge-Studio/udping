@@ -1,5 +1,7 @@
 # UDPing
 
+[Chinese README Here](README-ZH.md)
+
 UDPing is a simple command-line tool for testing network latency and connectivity using UDP packets. It supports both IP addresses and domain names.
 
 ## Features
