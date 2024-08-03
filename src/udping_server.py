@@ -2,7 +2,7 @@ import socket
 import argparse
 
 
-__version__ = "v0.1.0"
+__version__ = "v0.2.0-dev.1"
 
 
 def udping_server(host, port):

@@ -7,7 +7,7 @@ red = "\033[1;31m"
 yellow = "\033[1;33m"
 green = "\033[1;32m"
 reset = "\033[0m"
-__version__ = "v0.1.0"
+__version__ = "v0.2.0-dev.1"
 
 
 def resolve_host(host):
@@ -29,6 +29,7 @@ def udping_client(host, port, count, interval, timeout=1):
     server_address = (ip, port)
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.settimeout(timeout)
+    # TODO: Add proxy support
 
     seq = 0
     rtts = []
@@ -95,13 +96,18 @@ if __name__ == "__main__":
     parser.add_argument("port", type=int, help="Server port to ping")
     parser.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__}")
     parser.add_argument("-c", "--count", type=int, default=5, help="Number of pings to send")
+    parser.add_argument("-f", "--forever", action="store_true",
+                        help="Ping the server forever (will cover the count option)")
     parser.add_argument("-i", "--interval", type=float, default=1, help="Interval between pings in seconds")
     parser.add_argument("-t", "--timeout", type=float, default=1, help="Timeout for waiting for a response in seconds")
+    parser.add_argument("-w", "--wait", type=float, default=1, help="Timeout for waiting for a response in seconds")
+    parser.add_argument("-p", "--proxy", type=str, help="Use a proxy server to ping the target (protocol://host:port)")
     parser.add_argument("-dc", "--disable-color", action="store_true", help="Disable colored output")
 
     args = parser.parse_args()
 
     if args.disable_color:
         red = yellow = green = reset = ""
+    times = args.count if not args.forever else float("inf")
 
-    udping_client(args.host, args.port, args.count, args.interval, args.timeout)
+    udping_client(args.host, args.port, times, args.interval, args.timeout)
